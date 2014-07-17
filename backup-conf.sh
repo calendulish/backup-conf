@@ -48,7 +48,8 @@ function checkfiles() {
                         I|i) test -f $dest && rm $dest; echo -e "\n"
                              git checkout -- $dest 2>/dev/null
                              break ;;
-                        S|s|E|e) exit 1 ;;
+                        S|s|E|e) test ! -s $dest && rm $dest
+                                 exit 1 ;;
                         *) echo -ne " < Opção incorreta\r\n" && continue ;;
                     esac
                 done
