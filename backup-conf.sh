@@ -24,6 +24,10 @@ function checkfiles() {
             dest=HOME${file:${#HOME}}
         elif [ ${file:0:1} == "/" ]; then
             dest=${file:1}
+        else
+            echo "Não é um caminho absoluto: $file"
+            echo "Isso é um erro fatal! Saindo..."
+            exit 1
         fi
 
         if [ -f "$file" ]; then
