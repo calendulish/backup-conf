@@ -7,9 +7,23 @@ test $(id -u) == 0 && echo "EPA" && exit 1
 NOQUESTION=0
 CONFIG="/etc/backup-conf"
 _PWD="$PWD"
-ARGS=$(getopt -o r:y -l "root:,yes" -n "backup-conf" -- "$@");
+ARGS=$(getopt -o r:y:h -l "root:,yes:,help" -n "backup-conf" -- "$@");
 
 eval set -- "$ARGS"
+
+function help() {
+cat << EOF
+Uso: $0 [opção]... [arquivo]..."
+
+Nenhum parâmetro é estritamente necessário.
+
+ -r, --root <PASTA>       Usa <PASTA> como ROOT ao em vez
+                          do diretório atual.
+ -y, --yes                Responde sim automaticamente para
+                          todas as pergunta
+ -h, --help               Mostra esta ajuda e finaliza.
+EOF
+}
 
 while true; do
     case "$1" in
@@ -18,7 +32,7 @@ while true; do
                        _PWD="$1"
                        shift
                    else
-                       echo "Wrong syntax"
+                       echo "Sintaxe inválida."
                        exit 1
                    fi
                    ;;
@@ -26,6 +40,9 @@ while true; do
         -y|--yes) NOQUESTION=1
                   shift
                   ;;
+        -h|--help) help
+                   exit 0
+                   ;;
         --) shift
             break
             ;;
