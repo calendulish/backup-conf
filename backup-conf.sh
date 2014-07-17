@@ -4,7 +4,14 @@
 
 test $(id -u) == 0 && echo "EPA" && exit 1
 
+NOQUESTION=0
 CONFIG="/etc/backup-conf"
+
+case "$1" in
+    -y|--yes) NOQUESTION=1
+              shift
+              ;;
+esac
 
 function checkfiles() {
     # Accept single update
@@ -26,9 +33,13 @@ function checkfiles() {
 
             if ! colordiff -u "$dest" "$file"; then
                 while true; do
-                    echo -e "\n==> Arquivo $file"
-                    echo -ne "==> [C]opiar, [R]estaurar, [I]gnorar, [S]air: "
-                    read -n 1 opc
+                    if [ $NOQUESTION != 1 ]; then
+                        echo -e "\n==> Arquivo $file"
+                        echo -ne "==> [C]opiar, [R]estaurar, [I]gnorar, [S]air: "
+                        read -n 1 opc
+                    else
+                        opc=C
+                    fi
 
                     case $opc in
                         C|c) echo -e "\n==> Fazendo backup de '$file'"
