@@ -6,12 +6,31 @@ test $(id -u) == 0 && echo "EPA" && exit 1
 
 NOQUESTION=0
 CONFIG="/etc/backup-conf"
+_PWD="$PWD"
+ARGS=$(getopt -o r:y -l "root:,yes" -n "backup-conf" -- "$@");
 
-case "$1" in
-    -y|--yes) NOQUESTION=1
-              shift
-              ;;
-esac
+eval set -- "$ARGS"
+
+while true; do
+    case "$1" in
+        -r|--root) shift
+                   if [ -n "$1" ]; then
+                       _PWD="$1"
+                       shift
+                   else
+                       echo "Wrong syntax"
+                       exit 1
+                   fi
+                   ;;
+
+        -y|--yes) NOQUESTION=1
+                  shift
+                  ;;
+        --) shift
+            break
+            ;;
+    esac
+done
 
 function checkfiles() {
     # Accept single update
@@ -21,9 +40,9 @@ function checkfiles() {
 
         # if is $home
         if [ ${file:0:${#HOME}} == "$HOME" ]; then
-            dest=HOME${file:${#HOME}}
+            dest="$_PWD/HOME${file:${#HOME}}"
         elif [ ${file:0:1} == "/" ]; then
-            dest=${file:1}
+            dest="$_PWD$file"
         else
             echo "Não é um caminho absoluto: $file"
             echo "Isso é um erro fatal! Saindo..."
