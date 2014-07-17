@@ -49,7 +49,7 @@ function checkfiles() {
 }
 
 echo -e "\nCriando lista de arquivos..."
-declare -x FILES=($(cat $CONFIG))
+declare -x FILES=($(grep -v '^#' $CONFIG))
 
 echo "Verificando arquivos..."
 checkfiles "$1"
