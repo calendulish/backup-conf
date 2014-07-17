@@ -2,20 +2,9 @@
 # Lara Maia © 2012 ~ 2014 <lara@craft.net.br>
 # version: 4.0
 
-BOOT=/dev/sda2
-
 test $(id -u) == 0 && echo "EPA" && exit 1
 
 CONFIG="/etc/backup-conf"
-
-ls /boot/extlinux >/dev/null 2>&1
-if [ $? != 0 ]; then
-    echo -n "O /boot não está montado. Montar? [S/n]: "
-    read -n 1 mountboot
-    if [ "$mountboot" != "n" ] && [ "$mountboot" != "N" ]; then
-        echo && sudo mount $BOOT /boot
-    fi
-fi
 
 function checkfiles() {
     # Accept single update
@@ -66,10 +55,5 @@ echo "Verificando arquivos..."
 checkfiles "$1"
 
 echo -e "\nTarefa completada com sucesso!"
-
-if [ "$mountboot" != "n" ] && [ "$mountboot" != "N" ]; then
-    echo "Desmontando /boot"
-    sudo umount $BOOT
-fi
 
 exit 0
