@@ -9,19 +9,22 @@ CONFIG="/etc/backup-conf"
 _PWD="$PWD"
 ARGS=$(getopt -o r:y:h -l "root:,yes:,help" -n "backup-conf" -- "$@");
 
+export TEXTDOMAIN=backup-conf
+source gettext.sh
+
 eval set -- "$ARGS"
 
 function help() {
+program_name=$0
 cat << EOF
-Uso: $0 [opção]... [arquivo]..."
+$s_ Usage: $program_name [option]... [file]...
 
-Nenhum parâmetro é estritamente necessário.
+No parameter is strictly necessary.
 
- -r, --root <PASTA>       Usa <PASTA> como ROOT ao em vez
-                          do diretório atual.
- -y, --yes                Responde sim automaticamente para
-                          todas as pergunta
- -h, --help               Mostra esta ajuda e finaliza.
+ -r, --root <FOLDER>      Use <FOLDER> as ROOT instead of
+                          the current directory.
+ -y, --yes                Say yes for all questions
+ -h, --help               Show this help and exit.
 EOF
 }
 
@@ -32,7 +35,7 @@ while true; do
                        _PWD="$1"
                        shift
                    else
-                       echo "Sintaxe inválida."
+                       $_ "Invalid syntax."
                        exit 1
                    fi
                    ;;
@@ -61,8 +64,8 @@ function checkfiles() {
         elif [ ${file:0:1} == "/" ]; then
             dest="$_PWD$file"
         else
-            echo "Não é um caminho absoluto: $file"
-            echo "Isso é um erro fatal! Saindo..."
+            echo -e "     |- $(gettext "Location is not a valid absolute path:") $file\n"
+            echo -e "$(eval_gettext "Exiting")\n"
             exit 1
         fi
 
@@ -74,38 +77,38 @@ function checkfiles() {
             if ! colordiff -u "$dest" "$file"; then
                 while true; do
                     if [ $NOQUESTION != 1 ]; then
-                        echo -e "\n==> Arquivo $file"
-                        echo -ne "==> [C]opiar, [R]estaurar, [I]gnorar, [S]air: "
+                        echo -e "\n ==> $(gettext "File:") $file)"
+                        echo -ne " ==> $(gettext "[C]opy, [R]estore, [I]gnore, [E]xit:")"
                         read -n 1 opc
                     else
                         opc=C
                     fi
 
                     case $opc in
-                        C|c) echo -e "\n==> Fazendo backup de '$file'"
-                             cp -f "$file" "$dest" && echo -e "\n" && break || exit 1 ;;
+                        C|c) echo -e "\n\n     |- $(gettext "Backing up") $file"
+                             cp -f "$file" "$dest" && break || exit 1 ;;
                         R|r) echo && sudo cp -f "$dest" "$file" && echo -e "\n" && break || exit 1 ;;
                         I|i) test -f $dest && rm $dest; echo -e "\n"
                              git checkout -- $dest 2>/dev/null
                              break ;;
                         S|s|E|e) test ! -s $dest && rm $dest
                                  exit 1 ;;
-                        *) echo -ne " < Opção incorreta\r\n" && continue ;;
+                        *) echo -ne " < $(gettext "Wrong option")\r\n" && continue ;;
                     esac
                 done
             fi
         else
-            echo -e "\n * O arquivo $file não existe no sistema de arquivos, ignorando."
+            echo -e "\n     |- $(eval_gettext "The file \$file not found in file system. Ignoring.")"
         fi
     done
 }
 
-echo -e "\nCriando lista de arquivos..."
+echo -e "\n ==> $(gettext "Creating file list...")"
 declare -x FILES=($(grep -v '^#' $CONFIG))
 
-echo "Verificando arquivos..."
+echo -e "\n ==> $(gettext "Checking files...")"
 checkfiles "$1"
 
-echo -e "\nTarefa completada com sucesso!"
+echo -e "\n ==> $(gettext "Task completed.")"
 
 exit 0
