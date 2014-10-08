@@ -16,16 +16,12 @@ eval set -- "$ARGS"
 
 function help() {
 program_name=$0
-cat << EOF
-$s_ Usage: $program_name [option]... [file]...
-
-No parameter is strictly necessary.
-
- -r, --root <FOLDER>      Use <FOLDER> as ROOT instead of
-                          the current directory.
- -y, --yes                Say yes for all questions
- -h, --help               Show this help and exit.
-EOF
+echo -e "$(eval_gettext "Usage: $program_name [option]... [file]...")\n"
+echo -e "$(gettext "No parameter is strictly necessary.")\n"
+echo -e " -r, --root $(gettext "<FOLDER>      Use <FOLDER> as ROOT instead of")"
+echo -e "                          $(gettext "the current directory.")"
+echo -e " -y, --yes                $(gettext "Say yes for all questions")"
+echo -e " -h, --help               $(gettext "Show this help and exit.")"
 }
 
 while true; do
@@ -35,7 +31,7 @@ while true; do
                        _PWD="$1"
                        shift
                    else
-                       $_ "Invalid syntax."
+                       echo -e "$(gettext "Invalid syntax.")\n"
                        exit 1
                    fi
                    ;;
@@ -65,7 +61,7 @@ function checkfiles() {
             dest="$_PWD$file"
         else
             echo -e "     |- $(gettext "Location is not a valid absolute path:") $file\n"
-            echo -e "$(eval_gettext "Exiting")\n"
+            echo -e "$(gettext "Exiting")\n"
             exit 1
         fi
 
