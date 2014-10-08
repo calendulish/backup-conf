@@ -10,7 +10,7 @@ the script create a folder named "HOME" and put the files on it.
 Install
 -------
 
-# make install
+    # make install
 
 How to Use
 ----------
