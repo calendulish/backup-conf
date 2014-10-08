@@ -1,0 +1,83 @@
+# Backup Conf (Old update.sh)
+# Copyright (C) 2012~2014 Lara Maia <lara@craft.net.br>
+# This file is distributed under the same license as the Backup conf package.
+#
+
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: lara@craft.net.br\n"
+"POT-Creation-Date: 2014-10-07 20:56-0300\n"
+"PO-Revision-Date: 2014-10-07 21:00-0300\n"
+"Last-Translator: Lara Maia <lara@craft.net.br>\n"
+"Language-Team: Portuguese Brazilian <LL@li.org>\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: backup-conf.sh:21
+msgid "<FOLDER>      Use <FOLDER> as ROOT instead of"
+msgstr "<PASTA>       Usar <PASTA> como ROOT em vez"
+
+#: backup-conf.sh:88 backup-conf.sh:84
+msgid "Backing up"
+msgstr "Criando backup"
+
+#: backup-conf.sh:109 backup-conf.sh:105
+msgid "Checking files..."
+msgstr "Checando arquivos"
+
+#: backup-conf.sh:106 backup-conf.sh:102
+msgid "Creating file list..."
+msgstr "Criando lista de arquivos"
+
+#: backup-conf.sh:68 backup-conf.sh:64
+#, sh-format
+msgid "Exiting"
+msgstr "Saindo"
+
+#: backup-conf.sh:80 backup-conf.sh:76
+msgid "File:"
+msgstr "Arquivo:"
+
+#: backup-conf.sh:38 backup-conf.sh:34
+msgid "Invalid syntax."
+msgstr "Sintaxe inválida."
+
+#: backup-conf.sh:67 backup-conf.sh:63
+msgid "Location is not a valid absolute path:"
+msgstr "A localização não é um caminho absoluto válido:"
+
+#: backup-conf.sh:20
+msgid "No parameter is strictly necessary."
+msgstr "Nenhum parẫmetro é estritamente necessário."
+
+#: backup-conf.sh:23
+msgid "Say yes for all questions"
+msgstr "Responde sim para todas as questões"
+
+#: backup-conf.sh:24
+msgid "Show this help and exit."
+msgstr "Mostra essa ajuda e sai."
+
+#: backup-conf.sh:112 backup-conf.sh:108
+msgid "Task completed."
+msgstr "Tarefa completada."
+
+#: backup-conf.sh:101 backup-conf.sh:97
+#, sh-format
+msgid "The file $file not found in file system. Ignoring."
+msgstr "O arquivoo $file não foi encontrado no sistema de arquivos. Ignorando."
+
+#: backup-conf.sh:96 backup-conf.sh:92
+msgid "Wrong option"
+msgstr "Opção Inválida"
+
+#: backup-conf.sh:81 backup-conf.sh:77
+msgid "[C]opy, [R]estore, [I]gnore, [E]xit:"
+msgstr "[C]opiar, [R]estaurar, [I]gnorar, [S]air:"
+
+#: backup-conf.sh:22
+msgid "the current directory."
+msgstr "do diretório atual."
