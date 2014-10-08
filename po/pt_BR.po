@@ -68,7 +68,7 @@ msgstr "Tarefa completada."
 #: backup-conf.sh:101 backup-conf.sh:97
 #, sh-format
 msgid "The file $file not found in file system. Ignoring."
-msgstr "O arquivoo $file não foi encontrado no sistema de arquivos. Ignorando."
+msgstr "O arquivo $file não foi encontrado no sistema de arquivos. Ignorando."
 
 #: backup-conf.sh:96 backup-conf.sh:92
 msgid "Wrong option"

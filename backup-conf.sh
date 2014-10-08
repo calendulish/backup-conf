@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Lara Maia © 2012 ~ 2014 <lara@craft.net.br>
 # version: 4.0
 
@@ -53,6 +53,8 @@ function checkfiles() {
     test "$1" != "" && FILES=("$1")
 
     for file in ${FILES[@]}; do
+        # expand variables
+        file=$(eval echo $file)
 
         # if is $home
         if [ ${file:0:${#HOME}} == "$HOME" ]; then
@@ -60,7 +62,7 @@ function checkfiles() {
         elif [ ${file:0:1} == "/" ]; then
             dest="$_PWD$file"
         else
-            echo -e "     |- $(gettext "Location is not a valid absolute path:") $file\n"
+            echo -e "\nERROR: $(gettext "Location is not a valid absolute path:") $file"
             echo -e "$(gettext "Exiting")\n"
             exit 1
         fi
@@ -88,7 +90,7 @@ function checkfiles() {
                              git checkout -- $dest 2>/dev/null
                              break ;;
                         S|s|E|e) test ! -s $dest && rm $dest
-                                 exit 1 ;;
+                                 echo && exit 1 ;;
                         *) echo -ne " < $(gettext "Wrong option")\r\n" && continue ;;
                     esac
                 done
