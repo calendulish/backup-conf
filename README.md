@@ -9,18 +9,10 @@ the script create a folder named "HOME" and put the files on it.
 
 Install
 -------
-Copy backup-conf.sh into PATH. E.g:
 
-```
-cp backup-conf.sh /usr/bin/backup-conf
-chmod 755 /usr/bin/backup-conf
-```
+# make install
 
-And the config file in /etc folder:
+How to Use
+----------
 
-```
-cp backup-conf /etc/
-chmod 644 /etc/backup-conf
-```
-
-[*Still in Development*]
+See config file.
