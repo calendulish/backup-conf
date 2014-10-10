@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-07 21:27-0300\n"
+"POT-Creation-Date: 2014-10-10 16:35-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,68 +16,85 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: backup-conf.sh:21
+#: backup-conf.sh:30
 msgid "<FOLDER>      Use <FOLDER> as ROOT instead of"
 msgstr ""
 
-#: backup-conf.sh:88 backup-conf.sh:84
+#: backup-conf.sh:95
 msgid "Backing up"
 msgstr ""
 
-#: backup-conf.sh:109 backup-conf.sh:105
+#: backup-conf.sh:116
 msgid "Checking files..."
 msgstr ""
 
-#: backup-conf.sh:106 backup-conf.sh:102
+#: backup-conf.sh:13
+#, sh-format
+msgid "Copy the example to $XDG_CONFIG_HOME/backup-conf.conf or"
+msgstr ""
+
+#: backup-conf.sh:113
 msgid "Creating file list..."
 msgstr ""
 
-#: backup-conf.sh:68 backup-conf.sh:64
-#, sh-format
+#: backup-conf.sh:15 backup-conf.sh:75
 msgid "Exiting"
 msgstr ""
 
-#: backup-conf.sh:80 backup-conf.sh:76
+#: backup-conf.sh:87
 msgid "File:"
 msgstr ""
 
-#: backup-conf.sh:38 backup-conf.sh:34
+#: backup-conf.sh:43
 msgid "Invalid syntax."
 msgstr ""
 
-#: backup-conf.sh:67 backup-conf.sh:63
+#: backup-conf.sh:74
 msgid "Location is not a valid absolute path:"
 msgstr ""
 
-#: backup-conf.sh:20
+#: backup-conf.sh:29
 msgid "No parameter is strictly necessary."
 msgstr ""
 
-#: backup-conf.sh:23
+#: backup-conf.sh:32
 msgid "Say yes for all questions"
 msgstr ""
 
-#: backup-conf.sh:24
+#: backup-conf.sh:33
 msgid "Show this help and exit."
 msgstr ""
 
-#: backup-conf.sh:112 backup-conf.sh:108
+#: backup-conf.sh:119
 msgid "Task completed."
 msgstr ""
 
-#: backup-conf.sh:101 backup-conf.sh:97
+#: backup-conf.sh:12
+msgid "The Configuration file was not found"
+msgstr ""
+
+#: backup-conf.sh:108
 #, sh-format
 msgid "The file $file not found in file system. Ignoring."
 msgstr ""
 
-#: backup-conf.sh:96 backup-conf.sh:92
+#: backup-conf.sh:28
+#, sh-format
+msgid "Usage: $program_name [option]... [file]..."
+msgstr ""
+
+#: backup-conf.sh:103
 msgid "Wrong option"
 msgstr ""
 
-#: backup-conf.sh:81 backup-conf.sh:77
+#: backup-conf.sh:88
 msgid "[C]opy, [R]estore, [I]gnore, [E]xit:"
 msgstr ""
 
-#: backup-conf.sh:22
+#: backup-conf.sh:14
+msgid "and edit with your files/directories."
+msgstr ""
+
+#: backup-conf.sh:31
 msgid "the current directory."
 msgstr ""

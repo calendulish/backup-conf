@@ -10,8 +10,8 @@ elif [ -f "/etc/backup-conf.conf" ]; then
     CONFIG="/etc/backup-conf.conf"
 else
     echo -e "\nERROR: $(gettext "The Configuration file was not found")"
-    echo "$(eval_gettext "Copy the example to $XDG_CONFIG_HOME/backup-conf.conf or")"
-    echo "$(gettext "/etc/bakcup-conf.conf and edit with your files/directories.")"
+    echo "$(eval_gettext "Copy the example to \$XDG_CONFIG_HOME/backup-conf.conf or")"
+    echo "/etc/bakcup-conf.conf $(gettext "and edit with your files/directories.")"
     echo -e "$(gettext "Exiting")\n" && exit 1
 fi
 
@@ -25,7 +25,7 @@ eval set -- "$ARGS"
 
 function help() {
 program_name=$0
-echo -e "$(eval_gettext "Usage: $program_name [option]... [file]...")\n"
+echo -e "$(eval_gettext "Usage: \$program_name [option]... [file]...")\n"
 echo -e "$(gettext "No parameter is strictly necessary.")\n"
 echo -e " -r, --root $(gettext "<FOLDER>      Use <FOLDER> as ROOT instead of")"
 echo -e "                          $(gettext "the current directory.")"
