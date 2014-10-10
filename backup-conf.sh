@@ -1,14 +1,23 @@
 #!/bin/bash
 # Lara Maia © 2012 ~ 2014 <lara@craft.net.br>
-# version: 4.0
+# version: 4.2
 
 test $(id -u) == 0 && echo "EPA" && exit 1
 
+if [ -f $XDG_CONFIG_HOME/backup-conf.conf ]; then
+    CONFIG="$XDG_CONFIG_HOME"/backup-conf.conf
+elif [ -f "/etc/backup-conf.conf" ]; then
+    CONFIG="/etc/backup-conf.conf"
+else
+    echo -e "\nERROR: $(gettext "The Configuration file was not found")"
+    echo "$(eval_gettext "Copy the example to $XDG_CONFIG_HOME/backup-conf.conf or")"
+    echo "$(gettext "/etc/bakcup-conf.conf and edit with your files/directories.")"
+    echo -e "$(gettext "Exiting")\n" && exit 1
+fi
+
 NOQUESTION=0
-CONFIG="/etc/backup-conf"
 _PWD="$PWD"
 ARGS=$(getopt -o r:y:h -l "root:,yes:,help" -n "backup-conf" -- "$@");
-
 export TEXTDOMAIN=backup-conf
 source gettext.sh
 
