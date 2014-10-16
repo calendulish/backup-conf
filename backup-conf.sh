@@ -62,9 +62,6 @@ function checkfiles() {
     test "$1" != "" && FILES=("$1")
 
     for file in ${FILES[@]}; do
-        # expand variables
-        file=$(eval echo $file)
-
         # if is $home
         if [ ${file:0:${#HOME}} == "$HOME" ]; then
             dest="$_PWD/HOME${file:${#HOME}}"
@@ -111,7 +108,7 @@ function checkfiles() {
 }
 
 echo -e "\n ==> $(gettext "Creating file list...")"
-declare -x FILES=($(grep -v '^#' $CONFIG))
+declare -x FILES=($(eval echo `grep -v '^#' $CONFIG`))
 
 echo -e "\n ==> $(gettext "Checking files...")"
 checkfiles "$1"
