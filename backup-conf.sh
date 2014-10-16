@@ -4,6 +4,12 @@
 
 test $(id -u) == 0 && echo "EPA" && exit 1
 
+NOQUESTION=0
+_PWD="$PWD"
+ARGS=$(getopt -o r:y:h -l "root:,yes:,help" -n "backup-conf" -- "$@");
+export TEXTDOMAIN=backup-conf
+source gettext.sh
+
 if [ -f $XDG_CONFIG_HOME/backup-conf.conf ]; then
     CONFIG="$XDG_CONFIG_HOME"/backup-conf.conf
 elif [ -f "/etc/backup-conf.conf" ]; then
@@ -14,12 +20,6 @@ else
     echo "/etc/bakcup-conf.conf $(gettext "and edit with your files/directories.")"
     echo -e "$(gettext "Exiting")\n" && exit 1
 fi
-
-NOQUESTION=0
-_PWD="$PWD"
-ARGS=$(getopt -o r:y:h -l "root:,yes:,help" -n "backup-conf" -- "$@");
-export TEXTDOMAIN=backup-conf
-source gettext.sh
 
 eval set -- "$ARGS"
 
