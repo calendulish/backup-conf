@@ -1,6 +1,6 @@
 #!/bin/bash
 # Lara Maia © 2012 ~ 2015 <lara@craft.net.br>
-# version: 4.3
+# version: 4.4
 
 test $(id -u) == 0 && echo "EPA" && exit 1
 
@@ -102,7 +102,7 @@ function checkfiles() {
                 done
             fi
         else
-            echo -e "\n     |- $(eval_gettext "The file \$file not found in file system. Ignoring.")"
+            echo -e "\n     |- $(eval_gettext "WARNING: File \$file without read permission or not found.")"
         fi
     done
 }
