@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: lara@craft.net.br\n"
-"POT-Creation-Date: 2015-05-19 04:23-0300\n"
-"PO-Revision-Date: 2015-05-19 04:28-0300\n"
+"POT-Creation-Date: 2015-06-07 11:05-0300\n"
+"PO-Revision-Date: 2015-06-07 11:15-0300\n"
 "Last-Translator: Lara Maia <lara@craft.net.br>\n"
 "Language-Team: Portuguese Brazilian <LL@li.org>\n"
 "Language: pt_BR\n"
@@ -15,85 +15,85 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: backup-conf.sh:30
+#: backup-conf.sh:27
 msgid "<FOLDER>      Use <FOLDER> as ROOT instead of"
 msgstr "<PASTA>       Usar <PASTA> como ROOT em vez"
 
-#: backup-conf.sh:92
+#: backup-conf.sh:95
 msgid "Backing up"
 msgstr "Criando backup"
 
-#: backup-conf.sh:113
+#: backup-conf.sh:116
 msgid "Checking files..."
 msgstr "Checando arquivos"
 
-#: backup-conf.sh:19
+#: backup-conf.sh:18
 #, sh-format
 msgid "Copy the example to $XDG_CONFIG_HOME/backup-conf.conf or"
 msgstr "Copie o exemplo para $XDG_CONFIG_HOME/backup-conf.conf ou"
 
-#: backup-conf.sh:110
+#: backup-conf.sh:113
 msgid "Creating file list..."
 msgstr "Criando lista de arquivos"
 
-#: backup-conf.sh:21 backup-conf.sh:72
+#: backup-conf.sh:20 backup-conf.sh:69
 msgid "Exiting"
 msgstr "Saindo"
 
-#: backup-conf.sh:84
+#: backup-conf.sh:81
 msgid "File:"
 msgstr "Arquivo:"
 
-#: backup-conf.sh:43
+#: backup-conf.sh:40
 msgid "Invalid syntax."
 msgstr "Sintaxe inválida."
 
-#: backup-conf.sh:71
+#: backup-conf.sh:68
 msgid "Location is not a valid absolute path:"
 msgstr "A localização não é um caminho absoluto válido:"
 
-#: backup-conf.sh:29
+#: backup-conf.sh:26
 msgid "No parameter is strictly necessary."
 msgstr "Nenhum parẫmetro é estritamente necessário."
 
-#: backup-conf.sh:32
+#: backup-conf.sh:29
 msgid "Say yes for all questions"
 msgstr "Responde sim para todas as questões"
 
-#: backup-conf.sh:33
+#: backup-conf.sh:30
 msgid "Show this help and exit."
 msgstr "Mostra essa ajuda e sai."
 
-#: backup-conf.sh:116
+#: backup-conf.sh:119
 msgid "Task completed."
 msgstr "Tarefa completada."
 
-#: backup-conf.sh:18
+#: backup-conf.sh:17
 msgid "The Configuration file was not found"
 msgstr "O arquivo de configuração não foi encontrado"
 
-#: backup-conf.sh:28
+#: backup-conf.sh:25
 #, sh-format
 msgid "Usage: $program_name [option]... [file]..."
 msgstr "Uso: $program_name [opção]... [arquivo]..."
 
-#: backup-conf.sh:105
+#: backup-conf.sh:108
 #, sh-format
 msgid "WARNING: File $file without read permission or not found."
 msgstr "AVISO: O arquivo $file não tem permissão de leitura ou não foi encontrado."
 
-#: backup-conf.sh:100
+#: backup-conf.sh:103
 msgid "Wrong option"
 msgstr "Opção Inválida"
 
-#: backup-conf.sh:85
-msgid "[C]opy, [R]estore, [I]gnore, [E]xit:"
-msgstr "[C]opiar, [R]estaurar, [I]gnorar, [S]air:"
+#: backup-conf.sh:82
+msgid "[C]opy, [R]estore, [I]gnore, Copy [A]ll, [E]xit:"
+msgstr "[C]opiar, [R]estaurar, [I]gnorar, Copi[A]r Todos, [S]air:"
 
-#: backup-conf.sh:20
+#: backup-conf.sh:19
 msgid "and edit with your files/directories."
 msgstr "e edite com seus arquivos/diretórios."
 
-#: backup-conf.sh:31
+#: backup-conf.sh:28
 msgid "the current directory."
 msgstr "do diretório atual."
