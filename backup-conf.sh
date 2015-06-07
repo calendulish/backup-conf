@@ -1,12 +1,11 @@
 #!/bin/bash
 # Lara Maia © 2012 ~ 2015 <lara@craft.net.br>
-# version: 4.4
+# version: 4.4.1
 
 test $(id -u) == 0 && echo "EPA" && exit 1
 
 NOQUESTION=0
 _PWD="$PWD"
-ARGS=$(getopt -o r:y:h -l "root:,yes:,help" -n "backup-conf" -- "$@");
 export TEXTDOMAIN=backup-conf
 source gettext.sh
 
@@ -20,8 +19,6 @@ else
     echo "/etc/bakcup-conf.conf $(gettext "and edit with your files/directories.")"
     echo -e "$(gettext "Exiting")\n" && exit 1
 fi
-
-eval set -- "$ARGS"
 
 function help() {
 program_name=$0
@@ -51,7 +48,7 @@ while true; do
         -h|--help) help
                    exit 0
                    ;;
-        --) shift
+        "") shift
             break
             ;;
     esac
