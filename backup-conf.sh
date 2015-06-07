@@ -1,6 +1,6 @@
 #!/bin/bash
 # Lara Maia © 2012 ~ 2015 <lara@craft.net.br>
-# version: 4.4.1
+# version: 4.4.2
 
 test $(id -u) == 0 && echo "EPA" && exit 1
 
@@ -79,8 +79,14 @@ function checkfiles() {
                 while true; do
                     if [ $NOQUESTION != 1 ]; then
                         echo -e "\n ==> $(gettext "File:") $file)"
-                        echo -ne " ==> $(gettext "[C]opy, [R]estore, [I]gnore, [E]xit:")"
+                        echo -ne " ==> $(gettext "[C]opy, [R]estore, [I]gnore, Copy [A]ll, [E]xit:")"
                         read -n 1 opc
+                        case $opc in
+                            A|a)
+                                NOQUESTION=1
+                                opc=c
+                                ;;
+                        esac
                     else
                         opc=C
                     fi
