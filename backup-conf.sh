@@ -65,9 +65,8 @@ function checkfiles() {
         elif [ ${file:0:1} == "/" ]; then
             dest="$_PWD$file"
         else
-            echo -e "\nERROR: $(gettext "Location is not a valid absolute path:") $file"
-            echo -e "$(gettext "Exiting")\n"
-            exit 1
+            echo -e "\nWARNING: $(gettext "Location is not a valid absolute path:") $file"
+            continue
         fi
 
         if [ -f "$file" ]; then
