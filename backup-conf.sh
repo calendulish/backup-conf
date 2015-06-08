@@ -74,9 +74,10 @@ function checkfiles() {
             # Prevent destination not found
             test ! -f "$dest" && mkdir -p ${dest%/*} && touch $dest
 
-            if ! colordiff -u "$dest" "$file"; then
+            if ! cmp -s "$dest" "$file"; then
                 while true; do
                     if [ $NOQUESTION != 1 ]; then
+                        colordiff -u "$dest" "$file"
                         echo -e "\n ==> $(gettext "File:") $file)"
                         echo -ne " ==> $(gettext "[C]opy, [R]estore, [I]gnore, Copy [A]ll, [E]xit:")"
                         read -n 1 opc
