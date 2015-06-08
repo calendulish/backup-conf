@@ -51,6 +51,9 @@ while true; do
         "") shift
             break
             ;;
+         *) echo -e "$(gettext "Invalid option.")\n"
+            exit 1
+            ;;
     esac
 done
 
