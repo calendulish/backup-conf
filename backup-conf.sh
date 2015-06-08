@@ -68,7 +68,7 @@ function checkfiles() {
         elif [ ${file:0:1} == "/" ]; then
             dest="$_PWD$file"
         else
-            echo -e "\nWARNING: $(gettext "Location is not a valid absolute path:") $file"
+            echo -e "\n     |- $(eval_gettext "WARNING: Location \$file is not a valid absolute path.")"
             continue
         fi
 
@@ -82,7 +82,7 @@ function checkfiles() {
                     if [ $NOQUESTION != 1 ]; then
                         colordiff -u "$dest" "$file"
                         echo -e "\n ==> $(gettext "File:") $file)"
-                        echo -ne " ==> $(gettext "[C]opy, [R]estore, [I]gnore, Copy [A]ll, [E]xit:")"
+                        echo -ne " ==> $(gettext "[C]opy, Copy [A]ll, [R]estore, [I]gnore, [E]xit:")"
                         read -n 1 opc
                         case $opc in
                             A|a)
