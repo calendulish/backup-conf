@@ -9,6 +9,7 @@ SINGLEFILE=
 _PWD="$PWD"
 export TEXTDOMAIN=backup-conf
 source gettext.sh
+IFS=$'\n\b'
 
 if [ -f $XDG_CONFIG_HOME/backup-conf.conf ]; then
     CONFIG="$XDG_CONFIG_HOME"/backup-conf.conf
@@ -146,7 +147,7 @@ function checkfiles() {
 }
 
 echo -e "\n ==> $(gettext "Creating file list...")"
-declare -x FILES=($(eval echo `grep -v '^#' $CONFIG`))
+declare -x FILES=($(eval echo "\"`grep -v '^#' $CONFIG`\""))
 
 echo -e "\n ==> $(gettext "Checking files...")"
 checkfiles
