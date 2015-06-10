@@ -5,6 +5,7 @@
 test $(id -u) == 0 && echo "EPA" && exit 1
 
 NOQUESTION=0
+SINGLEFILE=
 _PWD="$PWD"
 export TEXTDOMAIN=backup-conf
 source gettext.sh
@@ -21,33 +22,64 @@ else
 fi
 
 function help() {
-program_name=$0
-echo -e "$(eval_gettext "Usage: \$program_name [option]... [file]...")\n"
-echo -e "$(gettext "No parameter is strictly necessary.")\n"
-echo -e " -r, --root $(gettext "<FOLDER>      Use <FOLDER> as ROOT instead of")"
-echo -e "                          $(gettext "the current directory.")"
-echo -e " -y, --yes                $(gettext "Say yes for all questions")"
-echo -e " -h, --help               $(gettext "Show this help and exit.")"
+    local program_name=$0
+    local msg1=$(eval_gettext "Usage: \$program_name [option]... [file]...")
+    local msg2=$(gettext "Parameters is not strictly necessary.")
+    local msg3=$(gettext "FOLDER")
+    local msg4=$(gettext "Use <FOLDER> as ROOT instead of")
+    local msg5=$(gettext "the current directory.")
+    local msg6=$(gettext "Say yes for all questions.")
+    local msg7=$(gettext "FILE")
+    local msg8=$(gettext "Update only the <FILE> instead of")
+    local msg9=$(gettext "file list at config file.")
+    local msg10=$(gettext "Show this help and exit.")
+
+    printf "$msg1\n$msg2\n\n"
+    printf " -r, --root <$msg3>%$[15-${#msg3}]c $msg4\n%29c $msg5\n"
+    printf " -y, --yes %18c $msg6\n"
+    printf " -f, --file <$msg7>%$[15-${#msg7}]c $msg8\n%29c $msg9\n"
+    printf " -h, --help %17c $msg10\n\n"
 }
 
 while true; do
     case "$1" in
-        -r|--root) shift
-                   if [ -n "$1" ]; then
-                       _PWD="$1"
-                       shift
-                   else
-                       echo -e "$(gettext "Invalid syntax.")\n"
-                       exit 1
-                   fi
-                   ;;
-
-        -y|--yes) NOQUESTION=1
-                  shift
-                  ;;
-        -h|--help) help
-                   exit 0
-                   ;;
+        -r|--root)
+            shift
+            value=$1
+            if [ -n "$value" -a "${value:0:1}" != "-" ]; then
+                if [ -d "$value" ]; then
+                    _PWD="$value"
+                    unset value
+                    shift
+                else
+                    echo -e "$(eval_gettext "Directory \$value not found.")\n"
+                    exit 1
+                fi
+            else
+                echo -e "$(gettext "Invalid syntax.")\n"
+                exit 1
+            fi
+            ;;
+        -y|--yes)
+            NOQUESTION=1
+            shift
+            ;;
+        -f|--file)
+            shift
+            value=$1
+            if [ -n "$value" -a "${value:0:1}" != "-" ]; then
+                SINGLEFILE="$value"
+                unset value
+                shift
+            else
+                echo -e "$(eval_gettext "File \$value not found.")\n"
+                exit 1
+            fi
+            ;;
+        -h|--help)
+            help
+            exit 0
+            ;;
         "") shift
             break
             ;;
@@ -59,7 +91,7 @@ done
 
 function checkfiles() {
     # Accept single update
-    test "$1" != "" && FILES=("$1")
+    test "$SINGLEFILE" != "" && FILES=("$SINGLEFILE")
 
     for file in ${FILES[@]}; do
         # if is $home
@@ -82,7 +114,7 @@ function checkfiles() {
                     if [ $NOQUESTION != 1 ]; then
                         colordiff -u "$dest" "$file"
                         echo -e "\n ==> $(gettext "File:") $file)"
-                        echo -ne " ==> $(gettext "[C]opy, Copy [A]ll, [R]estore, [I]gnore, [E]xit:")"
+                        echo -ne " ==> $(gettext "[C]Copy, [A]Copy all, [R]Restore, [I]Ignore, [E]Exit:")"
                         read -n 1 opc
                         case $opc in
                             A|a)
@@ -101,7 +133,7 @@ function checkfiles() {
                         I|i) test -f $dest && rm $dest; echo -e "\n"
                              git checkout -- $dest 2>/dev/null
                              break ;;
-                        S|s|E|e) test ! -s $dest && rm $dest
+                        E|e) test ! -s $dest && rm $dest
                                  echo && exit 1 ;;
                         *) echo -ne " < $(gettext "Wrong option")\r\n" && continue ;;
                     esac
@@ -117,7 +149,7 @@ echo -e "\n ==> $(gettext "Creating file list...")"
 declare -x FILES=($(eval echo `grep -v '^#' $CONFIG`))
 
 echo -e "\n ==> $(gettext "Checking files...")"
-checkfiles "$1"
+checkfiles
 
 echo -e "\n ==> $(gettext "Task completed.")"
 
