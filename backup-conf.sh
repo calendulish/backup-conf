@@ -22,6 +22,15 @@ else
     echo -e "$(gettext "Exiting")\n" && exit 1
 fi
 
+DIFFPROGRAM=$(grep '^#?DIFFPROGRAM' $CONFIG | cut -d' ' -f2-)
+if [ "$DIFFPROGRAM" == "" -o ! -f "$DIFFPROGRAM" ]; then
+    echo -e "\nERROR: $(gettext "The path of your diff tool is incorrect or not set.")"
+    echo -e "$(gettext "Please, check your configuration file. The variable")"
+    echo -e "$(gettext "#?DIFFPROGRAM must be set or the program will not work.")"
+    echo -e "$(gettext "Exiting")\n"
+    exit
+fi
+
 function help() {
     local program_name=$0
     local msg1=$(eval_gettext "Usage: \$program_name [option]... [file]...")
@@ -113,7 +122,7 @@ function checkfiles() {
             if ! cmp -s "$dest" "$file"; then
                 while true; do
                     if [ $NOQUESTION != 1 ]; then
-                        colordiff -u "$dest" "$file"
+                        $DIFFPROGRAM -u "$dest" "$file"
                         echo -e "\n ==> $(gettext "File:") $file)"
                         echo -ne " ==> $(gettext "[C]Copy, [A]Copy all, [R]Restore, [I]Ignore, [E]Exit:")"
                         read -n 1 opc

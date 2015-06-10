@@ -7,6 +7,11 @@
 # Hello~wooo, i'm a comment.
 #
 
+# Special Váriables
+# You can define a special variable for change the diff tool
+# A variable looks like this: #?variable. See below:
+#?DIFFPROGRAM /usr/bin/diff
+
 # HOW TO USE:
 #
 # Each line support the specification of one file.
