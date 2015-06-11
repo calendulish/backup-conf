@@ -48,6 +48,7 @@ function help() {
     printf " -r, --root <$msg3>%$[15-${#msg3}]c $msg4\n%29c $msg5\n"
     printf " -y, --yes %18c $msg6\n"
     printf " -f, --file <$msg7>%$[15-${#msg7}]c $msg8\n%29c $msg9\n"
+    printf " -c, --config\n"
     printf " -h, --help %17c $msg10\n\n"
 }
 
@@ -73,6 +74,18 @@ while true; do
         -y|--yes)
             NOQUESTION=1
             shift
+            ;;
+        -c|--config)
+            shift
+            value=$1
+            if [ -n $value -a "${value:0:1}" != "-" -a -f $value ]; then
+                CONFIG="$value"
+                unset value
+                shift
+            else
+                echo -e "$(eval_gettext "File \$value not found.")\n"
+                exit 1
+            fi
             ;;
         -f|--file)
             shift
