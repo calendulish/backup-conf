@@ -6,6 +6,7 @@ test $(id -u) == 0 && echo "EPA" && exit 1
 
 NOQUESTION=0
 SINGLEFILE=
+RM_OBSOLETE=
 _PWD="$PWD"
 export TEXTDOMAIN=backup-conf
 source gettext.sh
@@ -42,14 +43,19 @@ function help() {
     local msg7=$(gettext "FILE")
     local msg8=$(gettext "Update only the <FILE> instead of")
     local msg9=$(gettext "file list at config file.")
-    local msg10=$(gettext "Show this help and exit.")
+    local msg10=$(gettext "PATH")
+    local msg11=$(gettext "load config file from <PATH>")
+    local msg12=$(gettext "Remove all files in current folder that")
+    local msg13=$(gettext "doesn't have a entry on config file")
+    local msg14=$(gettext "Show this help and exit.")
 
     printf "$msg1\n$msg2\n\n"
     printf " -r, --root <$msg3>%$[15-${#msg3}]c $msg4\n%29c $msg5\n"
     printf " -y, --yes %18c $msg6\n"
     printf " -f, --file <$msg7>%$[15-${#msg7}]c $msg8\n%29c $msg9\n"
-    printf " -c, --config\n"
-    printf " -h, --help %17c $msg10\n\n"
+    printf " -c, --config <$msg10>%$[13-${#msg10}]c $msg11\n"
+    printf " -R, --remove-obsoletes %5c $msg12\n%29c $msg13\n"
+    printf " -h, --help %17c $msg14\n\n"
 }
 
 while true; do
@@ -98,6 +104,10 @@ while true; do
                 echo -e "$(eval_gettext "File \$value not found.")\n"
                 exit 1
             fi
+            ;;
+        -R|--remove-obsolete)
+            RM_OBSOLETE=1
+            shift
             ;;
         -h|--help)
             help
@@ -168,11 +178,46 @@ function checkfiles() {
     done
 }
 
+function rmfiles() {
+    pushd $_PWD >/dev/null
+    local unset IFS
+    echo -e "\n ==> $(gettext "Creating exclude list...")"
+    declare -x CURRENT_FILES=($(find * -type f -not -wholename '*.git*'))
+    for file in ${CURRENT_FILES[@]}; do
+        for match in ${FILES[@]}; do
+            match="${match/\/home\/lara/HOME/}"
+            match="${match/\//}"
+            #echo "$file == $match"
+            if [ $file == ${match/\/home\/lara/HOME} ]; then
+                CURRENT_FILES=(${CURRENT_FILES[@]/$file/})
+            fi
+        done
+    done
+
+    for file in ${CURRENT_FILES[@]}; do
+        if [ "$NOQUESTION" != 1 ]; then
+            echo -ne "\n  * $(gettext "$file file is no longer needed. Delete it? [s/N]")"
+            read -n 1 opc
+        else
+            opc=s
+        fi
+        case "$opc" in
+            s|S) echo; rm -fv $file
+        esac
+    done
+    popd >/dev/null
+}
+
 echo -e "\n ==> $(gettext "Creating file list...")"
 declare -x FILES=($(eval echo "\"`grep -v '^#' $CONFIG`\""))
 
-echo -e "\n ==> $(gettext "Checking files...")"
-checkfiles
+if test "$RM_OBSOLETE"; then
+    echo -e "\n ==> $(gettext "Removing obsolete files...")"
+    rmfiles
+else
+    echo -e "\n ==> $(gettext "Checking files...")"
+    checkfiles
+fi
 
 echo -e "\n ==> $(gettext "Task completed.")"
 
