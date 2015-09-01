@@ -29,11 +29,12 @@
 # TIPS:
 #
 # For backup all files into an folder, use a syntax like this:
-# `find <folder> -type f` (don't forget the '`')
+# $(find <folder> -type f)
 # All symlinks will be ignored.
 # For more info about how it's work, read the find command man page.
 #
-# NOTE: `<command>` only work if the result of command is a list of
-# absolute paths, one per line. (and when say "result", i mean a output in stdout.)
+# NOTE: $(<command>) only work if the result of command is a list of
+# absolute paths, one per line. (and when say "result", i mean a output
+# in stdout.)
 #
 # This is all

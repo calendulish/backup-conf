@@ -1,6 +1,6 @@
 #!/bin/bash
-# Lara Maia © 2012 ~ 2015 <lara@craft.net.br>
-# version: 5.0
+# Lara Maia © 2012 ~ 2015 <dev@lara.click>
+# version: 5.1
 
 test $(id -u) == 0 && echo "EPA" && exit 1
 
