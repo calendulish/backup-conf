@@ -185,10 +185,10 @@ function rmfiles() {
     declare -x CURRENT_FILES=($(find * -type f -not -wholename '*.git*'))
     for file in ${CURRENT_FILES[@]}; do
         for match in ${FILES[@]}; do
-            match="${match/\/home\/lara/HOME/}"
+            match="${match/$HOME/HOME/}"
             match="${match/\//}"
             #echo "$file == $match"
-            if [ $file == ${match/\/home\/lara/HOME} ]; then
+            if [ $file == ${match/$HOME/HOME} ]; then
                 CURRENT_FILES=(${CURRENT_FILES[@]/$file/})
             fi
         done
