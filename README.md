@@ -1,4 +1,4 @@
-Backup Conf (Old update.sh)
+Backup Conf (formerly update.sh)
 ---------------------------
 
 This script create a backup of your config files in a tree format
