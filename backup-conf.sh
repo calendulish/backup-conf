@@ -12,8 +12,8 @@ export TEXTDOMAIN=backup-conf
 source gettext.sh
 IFS=$'\n\b'
 
-if [ -f $XDG_CONFIG_HOME/backup-conf.conf ]; then
-    CONFIG="$XDG_CONFIG_HOME"/backup-conf.conf
+if [ -f ${XDG_CONFIG_HOME-$HOME/.config}/backup-conf.conf ]; then
+    CONFIG="${XDG_CONFIG_HOME-$HOME/.config}"/backup-conf.conf
 elif [ -f "/etc/backup-conf.conf" ]; then
     CONFIG="/etc/backup-conf.conf"
 else
