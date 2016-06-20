@@ -144,11 +144,16 @@ function checkfiles() {
         elif [ ${file:0:1} == "/" ]; then
             dest="$_PWD$file"
         else
-            echo -e "\n     |- $(eval_gettext "WARNING: Location \$file is not a valid absolute path.")"
+            echo -e "\n\n     |- $(eval_gettext "WARNING: Location \$file is not a valid absolute path.")"
             continue
         fi
 
         if [ -f "$file" ]; then
+
+            if test ! -s "$file"; then
+                echo -e "\n\n     |- $(eval_gettext "WARNING: The file \$file is empty. Ignoring.")"
+                continue
+            fi
 
             # Prevent destination not found
             test ! -f "$dest" && mkdir -p ${dest%/*} && touch $dest
