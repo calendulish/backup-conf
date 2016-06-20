@@ -238,11 +238,11 @@ function rmfiles() {
         if test "$NOQUESTION"; then
             opc=s
         else
-            echo -ne "\n  * $(gettext "$file file is no longer needed. Delete it? [s/N]")"
+            echo -ne "\n  * $(gettext "$file file is no longer needed. Delete it? [y/N]")"
             read -n 1 opc
         fi
         case "$opc" in
-            s|S)
+            s|S|y|Y)
                 echo
                 if test "$USE_GIT"; then
                     git rm -f $file
