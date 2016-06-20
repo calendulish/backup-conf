@@ -4,7 +4,7 @@
 
 test $(id -u) == 0 && echo "EPA" && exit 1
 
-NOQUESTION=0
+NOQUESTION=
 SINGLEFILE=
 RM_OBSOLETE=
 _PWD="$PWD"
@@ -144,7 +144,9 @@ function checkfiles() {
 
             if ! cmp -s "$dest" "$file"; then
                 while true; do
-                    if [ $NOQUESTION != 1 ]; then
+                    if test "$NOQUESTION"; then
+                        opc=C
+                    else
                         $DIFFPROGRAM -u "$dest" "$file"
                         echo -e "\n ==> $(gettext "File:") $file)"
                         echo -ne " ==> $(gettext "[C]Copy, [A]Copy all, [R]Restore, [I]Ignore, [E]Exit:")"
@@ -155,8 +157,6 @@ function checkfiles() {
                                 opc=c
                                 ;;
                         esac
-                    else
-                        opc=C
                     fi
 
                     case $opc in
@@ -195,11 +195,11 @@ function rmfiles() {
     done
 
     for file in ${CURRENT_FILES[@]}; do
-        if [ "$NOQUESTION" != 1 ]; then
+        if test "$NOQUESTION"; then
+            opc=s
+        else
             echo -ne "\n  * $(gettext "$file file is no longer needed. Delete it? [s/N]")"
             read -n 1 opc
-        else
-            opc=s
         fi
         case "$opc" in
             s|S) echo; rm -fv $file
