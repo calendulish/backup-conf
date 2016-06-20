@@ -32,6 +32,9 @@ if [ "$DIFFPROGRAM" == "" -o ! -f "$DIFFPROGRAM" ]; then
     exit
 fi
 
+USE_GIT=$(grep '^#?USE_GIT' $CONFIG | cut -d' ' -f2-)
+test "$USE_GIT" == "0" && USE_GIT=
+
 function help() {
     local program_name=$0
     local msg1=$(eval_gettext "Usage: \$program_name [option]... [file]...")
@@ -47,7 +50,8 @@ function help() {
     local msg11=$(gettext "load config file from <PATH>")
     local msg12=$(gettext "Remove all files in current folder that")
     local msg13=$(gettext "doesn't have a entry on config file")
-    local msg14=$(gettext "Show this help and exit.")
+    local msg14=$(gettext "If the ROOT is a git repository then use git functions")
+    local msg16=$(gettext "Show this help and exit.")
 
     printf "$msg1\n$msg2\n\n"
     printf " -r, --root <$msg3>%$[15-${#msg3}]c $msg4\n%29c $msg5\n"
@@ -55,7 +59,8 @@ function help() {
     printf " -f, --file <$msg7>%$[15-${#msg7}]c $msg8\n%29c $msg9\n"
     printf " -c, --config <$msg10>%$[13-${#msg10}]c $msg11\n"
     printf " -R, --remove-obsoletes %5c $msg12\n%29c $msg13\n"
-    printf " -h, --help %17c $msg14\n\n"
+    printf " -G, --use-git %14c $msg14\n"
+    printf " -h, --help %17c $msg16\n\n"
 }
 
 while true; do
@@ -109,14 +114,20 @@ while true; do
             RM_OBSOLETE=1
             shift
             ;;
+        -G|--use-git)
+            USE_GIT=1
+            shift
+            ;;
         -h|--help)
             help
             exit 0
             ;;
-        "") shift
+        "")
+            shift
             break
             ;;
-         *) echo -e "$(gettext "Invalid option.")\n"
+         *)
+            echo -e "$(gettext "Invalid option.")\n"
             exit 1
             ;;
     esac
@@ -160,15 +171,39 @@ function checkfiles() {
                     fi
 
                     case $opc in
-                        C|c) echo -e "\n\n     |- $(gettext "Backing up") $file"
-                             cp -f "$file" "$dest" && break || exit 1 ;;
-                        R|r) echo && sudo cp -f "$dest" "$file" && echo -e "\n" && break || exit 1 ;;
-                        I|i) test -f $dest && rm $dest; echo -e "\n"
-                             git checkout -- $dest 2>/dev/null
-                             break ;;
-                        E|e) test ! -s $dest && rm $dest
-                                 echo && exit 1 ;;
-                        *) echo -ne " < $(gettext "Wrong option")\r\n" && continue ;;
+                        C|c)
+                            echo -e "\n\n     |- $(gettext "Backing up") $file"
+                            cp -f "$file" "$dest" || exit 1
+                            if test "$USE_GIT"; then
+                                pushd $_PWD 1>/dev/null || exit 1
+                                git add "${dest/$_PWD\/}"
+                                popd 1>/dev/null || exit 1
+                            fi
+                            break
+                            ;;
+                        R|r)
+                            echo
+                            sudo cp -f "$dest" "$file" || exit 1
+                            echo -e "\n"
+                            break
+                            ;;
+                        I|i)
+                            test -f "$dest" && rm "$dest"
+                            echo -e "\n"
+                            if test "$USE_GIT"; then
+                                git checkout -- "$dest" 2>/dev/null
+                            fi
+                            break
+                            ;;
+                        E|e)
+                            test ! -s "$dest" && rm "$dest"
+                            echo
+                            exit 1
+                            ;;
+                        *)
+                            echo -ne " < $(gettext "Wrong option")\r\n"
+                            continue
+                            ;;
                     esac
                 done
             fi
@@ -202,7 +237,13 @@ function rmfiles() {
             read -n 1 opc
         fi
         case "$opc" in
-            s|S) echo; rm -fv $file
+            s|S)
+                echo
+                if test "$USE_GIT"; then
+                    git rm -f $file
+                else
+                    rm -fv $file
+                fi
         esac
     done
     popd >/dev/null

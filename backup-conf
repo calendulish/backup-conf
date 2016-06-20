@@ -11,6 +11,7 @@
 # You can define a special variable for change the diff tool
 # A variable looks like this: #?variable. See below:
 #?DIFFPROGRAM /usr/bin/diff
+#?USE_GIT 0
 
 # HOW TO USE:
 #
