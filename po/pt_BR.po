@@ -1,6 +1,5 @@
-
 # Backup Conf (Formerly update.sh)
-# Copyright (C) 2012~2015 Lara Maia <dev@lara.click>
+# Copyright (C) 2012~2016 Lara Maia <dev@lara.click>
 # This file is distributed under the same license as the Backup conf package.
 
 msgid ""
@@ -8,7 +7,7 @@ msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: lara@craft.net.br\n"
 "POT-Creation-Date: 2015-08-31 20:53-0300\n"
-"PO-Revision-Date: 2015-08-31 21:00-0300\n"
+"PO-Revision-Date: 2016-10-17 15:04-0200\n"
 "Last-Translator: Lara Maia <dev@lara.click>\n"
 "Language-Team: Portuguese Brazilian <LL@li.org>\n"
 "Language: pt_BR\n"
@@ -20,11 +19,11 @@ msgstr ""
 msgid "#?DIFFPROGRAM must be set or the program will not work."
 msgstr "#?DIFFPROGRAM deve estar definida ou o programa não vai funcionar."
 
-#: backup-conf.sh:163
+#: backup-conf.sh:190
 msgid "Backing up"
 msgstr "Criando backup"
 
-#: backup-conf.sh:218
+#: backup-conf.sh:274
 msgid "Checking files..."
 msgstr "Checando arquivos..."
 
@@ -33,15 +32,15 @@ msgstr "Checando arquivos..."
 msgid "Copy the example to $XDG_CONFIG_HOME/backup-conf.conf or"
 msgstr "Copie o exemplo para $XDG_CONFIG_HOME/backup-conf.conf ou"
 
-#: backup-conf.sh:184
+#: backup-conf.sh:234
 msgid "Creating exclude list..."
 msgstr "Criando lista de exclusão..."
 
-#: backup-conf.sh:211
+#: backup-conf.sh:267
 msgid "Creating file list..."
 msgstr "Criando lista de arquivos..."
 
-#: backup-conf.sh:72
+#: backup-conf.sh:77
 #, sh-format
 msgid "Directory $value not found."
 msgstr "Diretório $value não encontrado."
@@ -50,36 +49,44 @@ msgstr "Diretório $value não encontrado."
 msgid "Exiting"
 msgstr "Saindo"
 
-#: backup-conf.sh:43
+#: backup-conf.sh:46
 msgid "FILE"
 msgstr "ARQUIVO"
 
-#: backup-conf.sh:39
+#: backup-conf.sh:42
 msgid "FOLDER"
 msgstr "DIRETÓRIO"
 
-#: backup-conf.sh:92 backup-conf.sh:104
+#: backup-conf.sh:97 backup-conf.sh:109
 #, sh-format
 msgid "File $value not found."
 msgstr "Arquivo $value não encontrado."
 
-#: backup-conf.sh:149
+#: backup-conf.sh:177
 msgid "File:"
 msgstr "Arquivo:"
 
-#: backup-conf.sh:119
+#: backup-conf.sh:53
+msgid "If the ROOT is a git repository then use git functions"
+msgstr "Se o ROOT for um repositório git então use as funções git"
+
+#: backup-conf.sh:163
+msgid "Ignoring."
+msgstr "Ignorando."
+
+#: backup-conf.sh:130
 msgid "Invalid option."
 msgstr "Opção inválida."
 
-#: backup-conf.sh:76
+#: backup-conf.sh:81
 msgid "Invalid syntax."
 msgstr "Sintaxe inválida."
 
-#: backup-conf.sh:46
+#: backup-conf.sh:49
 msgid "PATH"
 msgstr "CAMINHO"
 
-#: backup-conf.sh:38
+#: backup-conf.sh:41
 msgid "Parameters is not strictly necessary."
 msgstr "Os Parâmetros não são estritamente necessários."
 
@@ -87,23 +94,27 @@ msgstr "Os Parâmetros não são estritamente necessários."
 msgid "Please, check your configuration file. The variable"
 msgstr "Por favor, verifique seu arquivo de configuração. A variável"
 
-#: backup-conf.sh:48
+#: backup-conf.sh:51
 msgid "Remove all files in current folder that"
 msgstr "Remove todos os arquivos na pasta atual que"
 
-#: backup-conf.sh:215
+#: backup-conf.sh:156
+msgid "Removing from backup."
+msgstr "Removendo do backup."
+
+#: backup-conf.sh:271
 msgid "Removing obsolete files..."
 msgstr "Removendo arquivos obsoletos..."
 
-#: backup-conf.sh:42
+#: backup-conf.sh:45
 msgid "Say yes for all questions."
 msgstr "Responde sim para todas as perguntas."
 
-#: backup-conf.sh:50
+#: backup-conf.sh:54
 msgid "Show this help and exit."
 msgstr "Mostra essa ajuda e sai."
 
-#: backup-conf.sh:222
+#: backup-conf.sh:278
 msgid "Task completed."
 msgstr "Tarefa completada."
 
@@ -116,35 +127,40 @@ msgid "The path of your diff tool is incorrect or not set."
 msgstr ""
 "O caminho da sua ferramenta de comparação está incorreta ou não definida."
 
-#: backup-conf.sh:44
+#: backup-conf.sh:47
 msgid "Update only the <FILE> instead of"
 msgstr "Atualizar somente o <ARQUIVO> ao invés de"
 
-#: backup-conf.sh:37
+#: backup-conf.sh:40
 #, sh-format
 msgid "Usage: $program_name [option]... [file]..."
 msgstr "Uso: $program_name [opção]... [arquivo]..."
 
-#: backup-conf.sh:40
+#: backup-conf.sh:43
 msgid "Use <FOLDER> as ROOT instead of"
 msgstr "Usar <DIRETÓRIO> como ROOT ao invés de"
 
-#: backup-conf.sh:176
+#: backup-conf.sh:226
 #, sh-format
 msgid "WARNING: File $file without read permission or not found."
 msgstr ""
 "AVISO: O arquivo $file não tem permissão de leitura ou não foi encontrado."
 
-#: backup-conf.sh:136
+#: backup-conf.sh:147
 #, sh-format
 msgid "WARNING: Location $file is not a valid absolute path."
 msgstr "AVISO: Local $file não é um caminho absoluto válido."
 
-#: backup-conf.sh:171
+#: backup-conf.sh:154
+#, sh-format
+msgid "WARNING: The file $file is empty."
+msgstr "AVISO: O arquivo $file está vazio."
+
+#: backup-conf.sh:219
 msgid "Wrong option"
 msgstr "Opção Inválida"
 
-#: backup-conf.sh:150
+#: backup-conf.sh:178
 msgid "[C]Copy, [A]Copy all, [R]Restore, [I]Ignore, [E]Exit:"
 msgstr "[C]Copiar, [A]Copiar todos, [R]Restaurar, [I]Ignorar, [E]Sair:"
 
@@ -152,18 +168,18 @@ msgstr "[C]Copiar, [A]Copiar todos, [R]Restaurar, [I]Ignorar, [E]Sair:"
 msgid "and edit with your files/directories."
 msgstr "e edite com seus arquivos/diretórios."
 
-#: backup-conf.sh:49
+#: backup-conf.sh:52
 msgid "doesn't have a entry on config file"
 msgstr "não possuí uma entrada no arquivo de configuração"
 
-#: backup-conf.sh:45
+#: backup-conf.sh:48
 msgid "file list at config file."
 msgstr "lista de arquivos no arquivo de configuração."
 
-#: backup-conf.sh:47
+#: backup-conf.sh:50
 msgid "load config file from <PATH>"
 msgstr "Carrega arquivo de configuração do <CAMINHO>"
 
-#: backup-conf.sh:41
+#: backup-conf.sh:44
 msgid "the current directory."
 msgstr "o diretório atual."
