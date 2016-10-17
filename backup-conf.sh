@@ -151,7 +151,17 @@ function checkfiles() {
         if [ -f "$file" ]; then
 
             if test ! -s "$file"; then
-                echo -e "\n\n     |- $(eval_gettext "WARNING: The file \$file is empty. Ignoring.")"
+                echo -en "\n\n     |- $(eval_gettext "WARNING: The file \$file is empty.")"
+                if test -f "$dest"; then
+                    echo -e " $(gettext "Removing from backup.")"
+                    if test "$USE_GIT"; then
+                        git rm -f $dest
+                    else
+                        rm -fv $dest
+                    fi
+                else
+                    echo -e " $(gettext "Ignoring.")"
+                fi
                 continue
             fi
 
