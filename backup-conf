@@ -1,10 +1,10 @@
-# Example file for configuration of backup-conf
+# Example configuration file for backup-conf
 #
 
 # COMMENTS:
 #
 # This file accepts comments with hashtags. E.g.:
-# Hello~wooo, i'm a comment.
+# Hello~wooo, I'm a comment.
 #
 
 # Special Váriables
@@ -18,24 +18,23 @@
 # Each line support the specification of one file.
 # E.g.:
 /etc/backup-conf.conf
-# The line above will backup the backup-conf into:
+# The line above will backup the backup-conf configs into:
 # <CURRENT_FOLDER>/etc/backup-conf.conf
-# The folder structure will be ever the same on the system.
-# Except for files into /home/<user>, these files will be
-# backed up into: <CURRENT_FOLDER>/HOME/
+# The folder structure inside <CURRENT_FOLDER> will be same
+# from original location, except for files into /home/<user>,
+# these files will be backed up into: <CURRENT_FOLDER>/HOME/
 # (you can use $HOME variable, it will be expanded to /home/<user>)
 #
 # -------------------------------------------------------------------
 
 # TIPS:
 #
-# For backup all files into an folder, use a syntax like this:
+# For backup all files from a folder, use a syntax like this:
 # $(find <folder> -type f)
 # All symlinks will be ignored.
-# For more info about how it's work, read the find command man page.
+# For more info about how it work, read the man pages from 'find' command.
 #
 # NOTE: $(<command>) only work if the result of command is a list of
-# absolute paths, one per line. (and when say "result", i mean a output
-# in stdout.)
+# absolute paths, one per line. (and when say "result", I mean stdout)
 #
-# This is all
+# That's all
