@@ -2,8 +2,6 @@
 # Lara Maia <dev@lara.click> 2012 ~ 2021
 # version: 5.2
 
-test $(id -u) == 0 && echo "EPA" && exit 1
-
 NOQUESTION=
 SINGLEFILE=
 RM_OBSOLETE=
@@ -11,6 +9,8 @@ _PWD="$PWD"
 export TEXTDOMAIN=backup-conf
 source gettext.sh
 IFS=$'\n\b'
+
+test $(id -u) == 0 && echo -e "\nWARNING: $(gettext "running as root")" && sleep 5
 
 if [ -f ${XDG_CONFIG_HOME-$HOME/.config}/backup-conf.conf ]; then
     CONFIG="${XDG_CONFIG_HOME-$HOME/.config}"/backup-conf.conf
