@@ -1,14 +1,14 @@
 # Backup Conf (Formerly update.sh)
-# Copyright (C) 2012~2016 Lara Maia <dev@lara.click>
+# Copyright (C) 2012~2021 Lara Maia <dev@lara.click>
 # This file is distributed under the same license as the Backup conf package.
-
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: 1.0\n"
-"Report-Msgid-Bugs-To: lara@craft.net.br\n"
+"Project-Id-Version: 5.2\n"
+"Report-Msgid-Bugs-To: dev@lara.monster\n"
 "POT-Creation-Date: 2015-08-31 20:53-0300\n"
-"PO-Revision-Date: 2016-10-17 15:04-0200\n"
-"Last-Translator: Lara Maia <dev@lara.click>\n"
+"PO-Revision-Date: 2021-09-11 00:45-0300\n"
+"Last-Translator: Lara Maia <dev@lara.monster>\n"
 "Language-Team: Portuguese Brazilian <LL@li.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -23,7 +23,7 @@ msgstr "#?DIFFPROGRAM deve estar definida ou o programa não vai funcionar."
 msgid "Backing up"
 msgstr "Criando backup"
 
-#: backup-conf.sh:274
+#: backup-conf.sh:279
 msgid "Checking files..."
 msgstr "Checando arquivos..."
 
@@ -32,11 +32,11 @@ msgstr "Checando arquivos..."
 msgid "Copy the example to $XDG_CONFIG_HOME/backup-conf.conf or"
 msgstr "Copie o exemplo para $XDG_CONFIG_HOME/backup-conf.conf ou"
 
-#: backup-conf.sh:234
+#: backup-conf.sh:239
 msgid "Creating exclude list..."
 msgstr "Criando lista de exclusão..."
 
-#: backup-conf.sh:267
+#: backup-conf.sh:272
 msgid "Creating file list..."
 msgstr "Criando lista de arquivos..."
 
@@ -102,7 +102,7 @@ msgstr "Remove todos os arquivos na pasta atual que"
 msgid "Removing from backup."
 msgstr "Removendo do backup."
 
-#: backup-conf.sh:271
+#: backup-conf.sh:276
 msgid "Removing obsolete files..."
 msgstr "Removendo arquivos obsoletos..."
 
@@ -114,7 +114,7 @@ msgstr "Responde sim para todas as perguntas."
 msgid "Show this help and exit."
 msgstr "Mostra essa ajuda e sai."
 
-#: backup-conf.sh:278
+#: backup-conf.sh:283
 msgid "Task completed."
 msgstr "Tarefa completada."
 
@@ -140,7 +140,7 @@ msgstr "Uso: $program_name [opção]... [arquivo]..."
 msgid "Use <FOLDER> as ROOT instead of"
 msgstr "Usar <DIRETÓRIO> como ROOT ao invés de"
 
-#: backup-conf.sh:226
+#: backup-conf.sh:231
 #, sh-format
 msgid "WARNING: File $file without read permission or not found."
 msgstr ""
@@ -156,7 +156,11 @@ msgstr "AVISO: Local $file não é um caminho absoluto válido."
 msgid "WARNING: The file $file is empty."
 msgstr "AVISO: O arquivo $file está vazio."
 
-#: backup-conf.sh:219
+#: backup-conf.sh:205
+msgid "Warning: Sudo unavailable. Ignoring Restore."
+msgstr "Aviso: Sudo não está disponível. Ignorando Restauração."
+
+#: backup-conf.sh:224
 msgid "Wrong option"
 msgstr "Opção Inválida"
 
@@ -179,6 +183,10 @@ msgstr "lista de arquivos no arquivo de configuração."
 #: backup-conf.sh:50
 msgid "load config file from <PATH>"
 msgstr "Carrega arquivo de configuração do <CAMINHO>"
+
+#: backup-conf.sh:13
+msgid "running as root"
+msgstr "rodando como root"
 
 #: backup-conf.sh:44
 msgid "the current directory."

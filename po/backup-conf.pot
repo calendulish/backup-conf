@@ -1,5 +1,5 @@
 # Backup Conf (Formerly update.sh)
-# Copyright (C) 2012~2016 Lara Maia <dev@lara.click>
+# Copyright (C) 2012~2021 Lara Maia <dev@lara.click>
 # This file is distributed under the same license as the Backup conf package.
 #
 #, fuzzy
@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-10-17 15:03-0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2021-09-11 00:43-0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -27,7 +27,7 @@ msgstr ""
 msgid "Backing up"
 msgstr ""
 
-#: backup-conf.sh:274
+#: backup-conf.sh:279
 msgid "Checking files..."
 msgstr ""
 
@@ -36,11 +36,11 @@ msgstr ""
 msgid "Copy the example to $XDG_CONFIG_HOME/backup-conf.conf or"
 msgstr ""
 
-#: backup-conf.sh:234
+#: backup-conf.sh:239
 msgid "Creating exclude list..."
 msgstr ""
 
-#: backup-conf.sh:267
+#: backup-conf.sh:272
 msgid "Creating file list..."
 msgstr ""
 
@@ -112,7 +112,7 @@ msgstr ""
 msgid "Removing from backup."
 msgstr ""
 
-#: backup-conf.sh:271
+#: backup-conf.sh:276
 msgid "Removing obsolete files..."
 msgstr ""
 
@@ -127,7 +127,7 @@ msgstr ""
 msgid "Show this help and exit."
 msgstr ""
 
-#: backup-conf.sh:278
+#: backup-conf.sh:283
 msgid "Task completed."
 msgstr ""
 
@@ -156,7 +156,7 @@ msgstr ""
 msgid "Use <FOLDER> as ROOT instead of"
 msgstr ""
 
-#: backup-conf.sh:226
+#: backup-conf.sh:231
 #, sh-format
 msgid "WARNING: File $file without read permission or not found."
 msgstr ""
@@ -171,7 +171,11 @@ msgstr ""
 msgid "WARNING: The file $file is empty."
 msgstr ""
 
-#: backup-conf.sh:219
+#: backup-conf.sh:205
+msgid "Warning: Sudo unavailable. Ignoring Restore."
+msgstr ""
+
+#: backup-conf.sh:224
 msgid "Wrong option"
 msgstr ""
 
@@ -196,6 +200,10 @@ msgstr ""
 
 #: backup-conf.sh:50
 msgid "load config file from <PATH>"
+msgstr ""
+
+#: backup-conf.sh:13
+msgid "running as root"
 msgstr ""
 
 #: backup-conf.sh:44
