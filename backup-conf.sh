@@ -1,5 +1,5 @@
 #!/bin/bash
-# Lara Maia <dev@lara.click> 2012 ~ 2016
+# Lara Maia <dev@lara.click> 2012 ~ 2021
 # version: 5.2
 
 test $(id -u) == 0 && echo "EPA" && exit 1
@@ -198,7 +198,12 @@ function checkfiles() {
                             ;;
                         R|r)
                             echo
-                            sudo cp -f "$dest" "$file" || exit 1
+                            which sudo >/dev/null 2>&1
+                            if [ $? == 0 ]; then
+                                sudo cp -f "$dest" "$file" || exit 1
+                            else
+                                echo -e "\n\n     |- $(gettext "Warning: Sudo unavailable. Ignoring Restore.")"
+                            fi
                             echo -e "\n"
                             break
                             ;;
