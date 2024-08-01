@@ -1,6 +1,6 @@
 #!/bin/bash
-# Lara Maia <dev@lara.click> 2012 ~ 2021
-# version: 5.2
+# Lara Maia <dev@lara.monster> 2012 ~ 2024
+# version: 5.2.3
 
 NOQUESTION=
 SINGLEFILE=
@@ -18,9 +18,13 @@ elif [ -f "/etc/backup-conf.conf" ]; then
     CONFIG="/etc/backup-conf.conf"
 else
     echo -e "\nERROR: $(gettext "The Configuration file was not found")"
-    echo "$(eval_gettext "Copy the example to \$XDG_CONFIG_HOME/backup-conf.conf or")"
-    echo "/etc/bakcup-conf.conf $(gettext "and edit with your files/directories.")"
-    echo -e "$(gettext "Exiting")\n" && exit 1
+    echo "$(gettext "You can use the example file located at:")"
+    echo "/usr/share/backup-conf/backup-conf.conf.example"
+    echo "$(gettext "edit with the files/directories you want to backup.")"
+    echo "$(gettext "The valid paths for the config file are:")"
+    echo "${XDG_CONFIG_HOME-$HOME/.config}/backup-conf.conf"
+    echo "/etc/backup-conf.conf"
+    echo -e "\n$(gettext "Exiting")\n" && exit 1
 fi
 
 DIFFPROGRAM=$(grep '^#?DIFFPROGRAM' $CONFIG | cut -d' ' -f2-)
@@ -253,7 +257,7 @@ function rmfiles() {
         if test "$NOQUESTION"; then
             opc=s
         else
-            echo -ne "\n  * $(gettext "$file file is no longer needed. Delete it? [y/N]")"
+            echo -ne "\n  * $(eval_gettext "File \$file is no longer needed. Delete it? [y/N]")"
             read -n 1 opc
         fi
         case "$opc" in
